@@ -52,22 +52,21 @@ class Handler(FileSystemEventHandler):
         redis = Redis.from_url(self.config['janus']['redis_connection'])
         queue = Queue(self.config['janus']['queue_name'] + str(uuid.getnode()), connection=redis)
         data = {'event': event, 'config': self.config}
-        movie_length = self.get_length(event.src_path)
 
-        if PROVIDER == 1 and movie_length >= self.config['janus']['max_recording_seconds']:
+        if PROVIDER == 1 and self.check_length(event.src_path, self.config['janus']['max_recording_seconds']):
             queue.enqueue(backup_event, data)
 
     @staticmethod
-    def get_length(filename):
+    def check_length(filename, max_length):
         try:
             result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
                                      "format=duration", "-of",
                                      "default=noprint_wrappers=1:nokey=1", filename],
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.STDOUT)
-            return float(result.stdout)
+            return float(result.stdout) >= float(max_length)
         except:
-            return 300
+            return True
 
     def on_any_event(self, event):
         if event.is_directory:

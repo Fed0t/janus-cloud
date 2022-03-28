@@ -5,8 +5,6 @@ from mux_python.rest import ApiException
 
 
 def backup_event(event):
-    print('JOB: ', event)
-
     configuration = mux_python.Configuration()
     configuration.username = event['config']['janus']['mux_api_token']
     configuration.password = event['config']['janus']['mux_api_secret']
@@ -26,11 +24,12 @@ def backup_event(event):
 
 
 def upload(file, url):
-    content_name = str(file)
     content_path = os.path.abspath(file)
     content_size = os.stat(content_path).st_size
 
-    print(content_name, content_path, content_size)
+    if content_size == 0:
+        print("FileSize: %s\n" % content_size)
+        return False
 
     f = open(content_path, "rb")
 
@@ -49,7 +48,7 @@ def upload(file, url):
             print(r.json())
             print("r: %s, Content-Range: %s" % (r, headers['Content-Range']))
         except Exception as e:
-            print(e)
+            print('Upload error:  %s\n' % e)
 
 
 def read_in_chunks(file_object, chunk_size):
