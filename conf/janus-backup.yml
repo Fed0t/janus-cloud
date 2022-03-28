@@ -8,9 +8,9 @@ janus:
 
   max_recording_seconds: 0 # install ffmpeg for this conf
 
-  mux_api_token: "353f8961-77bd-4576-9ecf-11724d8288ce"
+  mux_api_token: ""
 
-  mux_api_secret: "ATu0qTVXVcAkLMx5vdnRcBuOTbU5koDbNRzDCN3QZNH0s4MEPMBazXQF0DnwXD/f32AO0qU6TW4"
+  mux_api_secret: ""
 
 
 admin_api:
