@@ -22,7 +22,7 @@ Second, Janus processes the WebRTC signalling, as well as the media data. But in
 - Consistent API with the Janus server (until v0.10.7), which is compatible with the original client of the Janus server
 
 
-3 Components
+4 Components
 -------------------
 
 Janus-cloud has two main components, Janus-proxy and Janus-sentinel.
@@ -48,6 +48,19 @@ Janus-sentinel is responsible to care for the Janus server, normally, it runs at
 - Support post the status/workload statistic to multi HTTP URL
 
 Note: the process of the Janus server can be started and maintained by the other system tools or system administrator manual, instead of Janus-sentinel. In this case, Janus-sentinel is only responsible for monitoring Janus server's status by its WebSocket API. But this approach is not a good idea.
+
+
+### Janus-backup
+
+-watchdog recordings folder
+-implement queue worker
+-add mux.com video api uploader
+
+todo: 
+-add multiple recordings sources/remote sources
+-add multiple upload storage providers
+
+(janus-backup /opt/janus-cloud/conf/janus-backup.yml)
 
 4 Plugins of Janus-proxy
 ------------------------------

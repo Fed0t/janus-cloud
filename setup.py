@@ -54,6 +54,7 @@ setup(name='janus-cloud',
                                     'conf/janus-proxy.plugin.videocall.yml',
                                     'conf/janus-proxy.plugin.videoroom.yml',
                                     'conf/janus-proxy.yml',
+                                    'conf/janus-backup.yml',
                                     'conf/janus-sentinel.yml']),
           ('opt/janus-cloud/html', ['html/p2pcalltest.html',
                                     'html/p2pcalltest.js']),
@@ -67,5 +68,6 @@ setup(name='janus-cloud',
       [console_scripts]
       janus-proxy = januscloud.proxy.main:main
       janus-sentinel = januscloud.sentinel.main:main
+      janus-backup = januscloud.backup.main:main
       """,
       )

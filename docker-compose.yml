@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/home/streams
+      - ./data:/opt/videos
+    ports:
+      - "8000:8000"
