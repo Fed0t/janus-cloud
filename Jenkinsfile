@@ -24,5 +24,6 @@ node('worker') {
     stage('deploy') {
         sh 'kubectl config view'
         sh 'kubectl rollout restart deployment streams-janus-proxy'
+        sh 'kubectl rollout restart daemonset streams-janus'
     }
 }
