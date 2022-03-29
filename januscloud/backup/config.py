@@ -20,13 +20,7 @@ config_schema = Schema({
         Optional("recordings_dir"): Default(StrVal(min_len=0, max_len=255), default=''),
         Optional("max_recording_seconds"): Default(IntVal(min=0, max=86400), default=120),
         Optional("redis_connection"): Default(StrVal(min_len=0, max_len=255), default=''),
-        Optional("remote_backup"): Default(BoolVal(), default=False),
         AutoDel(str): object  # for all other key remove
-    }, default={}),
-    Optional("admin_api"): Default({
-        Optional("json"): Default(EnumVal(['indented', 'plain', 'compact']), default='indented'),
-        Optional("http_listen"): Default(StrRe('^\S+:\d+$'), default='0.0.0.0:8100'),
-        AutoDel(str): object  # for all other key we don't care
     }, default={}),
     Optional("proc_watcher"): Default({
         Optional("cmdline"): Default(StrVal(), default=''),

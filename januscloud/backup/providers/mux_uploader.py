@@ -15,7 +15,7 @@ def backup_event(event):
                                                              mp4_support="standard",
                                                              passthrough=str(event['event'].src_path))
         create_upload_request = mux_python.CreateUploadRequest(timeout=3600, new_asset_settings=create_asset_request)
-        create_upload_response = uploads_api.create_direct_upload(create_upload_request, verify=False)
+        create_upload_response = uploads_api.create_direct_upload(create_upload_request)
         url = str(create_upload_response)
         upload(event['event'].src_path, url)
 

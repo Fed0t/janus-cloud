@@ -1,7 +1,8 @@
-FROM python:3.7-bullseye
+FROM python:ubuntu
 
 RUN apt update
-RUN apt install -y ffmpeg dmidecode
+RUN apt install -y ffmpeg
+RUN update-ca-certificates
 
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV

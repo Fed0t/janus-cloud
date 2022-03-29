@@ -4,16 +4,10 @@ janus:
 
   redis_connection: 'rediss://:hwgl39zgo4uupg5x@streams-redis-dev-do-user-1975712-0.b.db.ondigitalocean.com:25061/3'
 
-  recordings_dir: "/opt/recordings/"
+  recordings_dir: "/opt/recordings"
 
   max_recording_seconds: 0 # install ffmpeg for this conf
 
-  mux_api_token: ""
+  mux_api_token: "353f8961-77bd-4576-9ecf-11724d8288ce"
 
-  mux_api_secret: ""
-
-
-admin_api:
-  json: "indented"                      # Whether the JSON messages should be indented (default),
-  # plain (no indentation) or compact (no indentation and no spaces)
-  http_listen: '0.0.0.0:8300'           # REST API server listen addr
+  mux_api_secret: "ATu0qTVXVcAkLMx5vdnRcBuOTbU5koDbNRzDCN3QZNH0s4MEPMBazXQF0DnwXD/f32AO0qU6TW4"
