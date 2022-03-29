@@ -1,4 +1,4 @@
-FROM python:ubuntu
+FROM python:3.10-buster
 
 RUN apt update
 RUN apt install -y ffmpeg
