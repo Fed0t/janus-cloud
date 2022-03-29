@@ -549,7 +549,7 @@ class VideoCallPlugin(PluginBase):
             from januscloud.proxy.dao.mem_videocall_user_dao import MemVideoCallUserDao
             self.user_dao = MemVideoCallUserDao()
 
-        elif self.config['general']['user_db'].startswith('redis://'):
+        elif self.config['general']['user_db'].startswith('redis://') or self.config['general']['user_db'].startswith('rediss://'):
             import redis
             from januscloud.proxy.dao.rd_videocall_user_dao import RDVideoCallUserDao
             connection_pool = redis.BlockingConnectionPool.from_url(

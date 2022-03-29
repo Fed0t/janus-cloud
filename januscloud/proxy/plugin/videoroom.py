@@ -2693,7 +2693,7 @@ class VideoRoomPlugin(PluginBase):
         room_dao = None
         if self.config['general']['room_db'].startswith('memory'):
             room_dao = None
-        elif self.config['general']['room_db'].startswith('redis://'):
+        elif self.config['general']['room_db'].startswith('redis://') or self.config['general']['room_db'].startswith('rediss://'):
             import redis
             from januscloud.proxy.dao.rd_room_dao import RDRoomDao
             connection_pool = redis.BlockingConnectionPool.from_url(
