@@ -4,7 +4,7 @@ janus:
 
   redis_connection: 'rediss://:hwgl39zgo4uupg5x@streams-redis-dev-do-user-1975712-0.b.db.ondigitalocean.com:25061/3'
 
-  recordings_dir: "/opt/recordings"
+  recordings_dir: "/opt/data"
 
   max_recording_seconds: 0 # install ffmpeg for this conf
 
