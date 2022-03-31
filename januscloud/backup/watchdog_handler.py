@@ -38,5 +38,3 @@ class Handler(FileSystemEventHandler):
         elif event.event_type == 'created':
             self.enqueue_job(event)
             print("Received created event - %s." % event.src_path)
-        elif event.event_type == 'modified':
-            print("Received modified event - %s." % event.src_path)

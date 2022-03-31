@@ -1,10 +1,18 @@
 import mux_python
 import requests
 import os
+import time
 from mux_python.rest import ApiException
 
 
 def backup_event(event):
+
+    historical_size = -1
+    while historical_size != os.path.getsize(event['event'].src_path):
+        historical_size = os.path.getsize(event['event'].src_path)
+        time.sleep(1)
+    print("File finished modifying - %s." % event['event'].src_path)
+
     configuration = mux_python.Configuration()
     configuration.username = event['config']['janus']['mux_api_token']
     configuration.password = event['config']['janus']['mux_api_secret']
@@ -18,6 +26,7 @@ def backup_event(event):
         create_upload_response = uploads_api.create_direct_upload(create_upload_request)
         url = str(create_upload_response)
         upload(event['event'].src_path, url)
+        delete_file(event['event'].src_path)
 
     except ApiException as e:
         print("Exception when calling Mux Api: %s\n" % e)
@@ -57,3 +66,10 @@ def read_in_chunks(file_object, chunk_size):
         if not data:
             break
         yield data
+
+
+def delete_file(file):
+    if os.path.exists(file):
+        os.remove(file)
+    else:
+        print("The file does not exist")
