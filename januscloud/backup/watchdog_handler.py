@@ -13,7 +13,12 @@ class Handler(FileSystemEventHandler):
         self.config = config
 
     def enqueue_job(self, event):
-        redis = Redis.from_url(self.config['janus']['redis_connection'])
+        connection_pool = Redis.BlockingConnectionPool.from_url(
+            url=self.config['janus']['redis_connection'],
+            decode_responses=True,
+            health_check_interval=30,
+            timeout=10)
+        redis = Redis(connection_pool=connection_pool)
         queue = Queue(self.config['janus']['queue_name'] + str(uuid.getnode()), connection=redis)
         data = {'event': event, 'config': self.config}
 
