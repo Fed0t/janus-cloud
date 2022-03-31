@@ -37,4 +37,3 @@ class Handler(FileSystemEventHandler):
             return None
         elif event.event_type == 'created':
             self.enqueue_job(event)
-            print("Received created event - %s." % event.src_path)

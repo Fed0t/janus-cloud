@@ -24,13 +24,12 @@ def backup_event(event):
                                                              passthrough=str(event['event'].src_path))
         create_upload_request = mux_python.CreateUploadRequest(timeout=3600, new_asset_settings=create_asset_request)
         create_upload_response = uploads_api.create_direct_upload(create_upload_request)
-        print(create_upload_response)
-        url = str(create_upload_response['data']['url'])
+        url = str(create_upload_response.data.url)
         upload(event['event'].src_path, url)
         delete_file(event['event'].src_path)
 
     except ApiException as e:
-        print("Exception when calling Mux Api: %s\n" % e)
+        print("Exception when uploading file to Mux Api: %s\n" % e)
 
 
 def upload(file, url):
@@ -38,7 +37,6 @@ def upload(file, url):
     content_size = os.stat(content_path).st_size
 
     if content_size == 0:
-        print("FileSize: %s\n" % content_size)
         return False
 
     f = open(content_path, "rb")
@@ -55,7 +53,6 @@ def upload(file, url):
         try:
             file = {"file": chunk}
             r = requests.put(url, files=file, headers=headers, verify=False)
-            print(r.json())
             print("r: %s, Content-Range: %s" % (r, headers['Content-Range']))
         except Exception as e:
             print('Upload error:  %s\n' % e)
