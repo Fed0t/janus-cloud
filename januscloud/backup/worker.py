@@ -1,10 +1,10 @@
-from redis import Redis
+from redis import Redis, BlockingConnectionPool
 from rq import Queue, Worker
 import uuid
 
 
 def start_worker(config):
-    connection_pool = Redis.BlockingConnectionPool.from_url(
+    connection_pool = BlockingConnectionPool.from_url(
         url=config['janus']['redis_connection'],
         decode_responses=True,
         health_check_interval=30,

@@ -1,4 +1,4 @@
-from redis import Redis
+from redis import Redis, BlockingConnectionPool
 from rq import Queue
 from watchdog.events import FileSystemEventHandler
 from januscloud.backup.providers.mux_uploader import backup_event
@@ -13,7 +13,7 @@ class Handler(FileSystemEventHandler):
         self.config = config
 
     def enqueue_job(self, event):
-        connection_pool = Redis.BlockingConnectionPool.from_url(
+        connection_pool = BlockingConnectionPool.from_url(
             url=self.config['janus']['redis_connection'],
             decode_responses=True,
             health_check_interval=30,

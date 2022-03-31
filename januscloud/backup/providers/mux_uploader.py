@@ -52,7 +52,8 @@ def upload(file, url):
         index = offset
         try:
             file = {"file": chunk}
-            r = requests.put(url, files=file, headers=headers, verify=False)
+            r = requests.put(url, files=file, headers=headers)
+            print(r.json())
             print("r: %s, Content-Range: %s" % (r, headers['Content-Range']))
         except Exception as e:
             print('Upload error:  %s\n' % e)
@@ -69,5 +70,6 @@ def read_in_chunks(file_object, chunk_size):
 def delete_file(file):
     if os.path.exists(file):
         os.remove(file)
+        print('File deleted:  %s' % file)
     else:
         print("The file does not exist")
