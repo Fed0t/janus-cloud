@@ -24,7 +24,8 @@ def backup_event(event):
                                                              passthrough=str(event['event'].src_path))
         create_upload_request = mux_python.CreateUploadRequest(timeout=3600, new_asset_settings=create_asset_request)
         create_upload_response = uploads_api.create_direct_upload(create_upload_request)
-        url = str(create_upload_response)
+        print(create_upload_response)
+        url = str(create_upload_response['data']['url'])
         upload(event['event'].src_path, url)
         delete_file(event['event'].src_path)
 
