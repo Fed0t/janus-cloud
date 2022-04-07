@@ -1,4 +1,4 @@
-from redis import Redis, BlockingConnectionPool
+from redis import Redis, BlockingConnectionPool, TimeoutError
 from rq import Queue
 from watchdog.events import FileSystemEventHandler
 from januscloud.backup.providers.mux_uploader import backup_event
@@ -23,7 +23,10 @@ class Handler(FileSystemEventHandler):
         data = {'event': event, 'config': self.config}
 
         if PROVIDER == 1 and self.check_length(event.src_path, self.config['janus']['max_recording_seconds']):
-            queue.enqueue(backup_event, data)
+            try:
+                queue.enqueue(backup_event, data)
+            except TimeoutError:
+                print('Error enqueue job', event)
 
     @staticmethod
     def check_length(filename, max_length):

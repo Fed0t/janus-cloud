@@ -2,7 +2,7 @@ FROM python:3.9-alpine3.14
 
 
 RUN mkdir /home/code/
-RUN mkdir /opt/recordings/
+RUN mkdir /opt/data/
 
 COPY . /home/code
 WORKDIR /home/code
